@@ -42,6 +42,17 @@ app.get("/logout", (req, res) => {
     })
 })
 
+//Login con session
+app.get("/login", (req, res) => {
+    let {usuario, pass} = req.query;
+    if(usuario === "Fer" && pass === PASSWORD) {
+        req.session.user = usuario;
+        res.send("Bienvenido! Inicio de session exitoso")
+    } else {
+        res.send("Datos incorrectos")
+    }
+})
+
 //ruta para setear una cookie
 app.get("/setcookie", (req, res) => {
     //usamos el obj res para asignarle la cookie al cliente, se guardan en formato clave valor. siqueremos que las cookies tengan tiempo de vida agrgamos el objeto con una configuracion de maxAge en milisegundos.
