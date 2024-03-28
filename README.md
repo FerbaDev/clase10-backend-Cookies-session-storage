@@ -22,6 +22,9 @@ session id - req.session.counter ----- 01:23
 logout ------------------------------- 01:30
 middleware de autenticacion ---------- 01:38
 
+## Storage
+
+file storage ------------------------- 02:36     npm i session-file-store
 
 
 dejé en 01:20

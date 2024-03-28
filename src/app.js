@@ -3,6 +3,8 @@ const app = express();
 const PUERTO = 8080;
 import cookieParser from "cookie-parser";
 import session from "express-session";
+import FileStore  from "session-file-store";
+const fileStore = FileStore(session);
 
 //middleware para cookie parser
 const PASSWORD = "clavesecreta";
@@ -12,7 +14,12 @@ app.use(cookieParser(PASSWORD));
 app.use(session({
     secret: "secretCoder",
     resave: true,   //esto permite mantener activa la sesion frente a la inactividad del usuario
-    saveUninitialized: true  //permite guardar cualquier sesion
+    saveUninitialized: true,  //permite guardar cualquier sesion
+    //agregamos configuracion para usar file storage
+    store: new fileStore({path: "./src/sessions", ttl: 10000, retries: 1})
+    //path: la ruta donde se guardan las sessiones
+    //ttl es el tiempo que tarda en irse)time ti live)
+    //retries: el numero de veces que reintenta si da
 }))
 
 //rutas
@@ -100,3 +107,5 @@ app.get("/vercookiefirmada", (req, res) => {
 app.listen(PUERTO, () => {
     console.log(`Conectado a http://localhost:${PUERTO}`);
 })
+
+//Storage
