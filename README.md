@@ -20,6 +20,8 @@ obtener y leer la cookie firmada ----- 00:53
 instalando modulo session ------------ 01:14     npm i express-session
 session id - req.session.counter ----- 01:23
 logout ------------------------------- 01:30
+middleware de autenticacion ---------- 01:38
+
 
 
 dejé en 01:20

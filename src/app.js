@@ -47,10 +47,20 @@ app.get("/login", (req, res) => {
     let {usuario, pass} = req.query;
     if(usuario === "Fer" && pass === PASSWORD) {
         req.session.user = usuario;
+        req.session.loged = true
         res.send("Bienvenido! Inicio de session exitoso")
     } else {
         res.send("Datos incorrectos")
     }
+})
+
+//Middleware de autenticacion
+const auth = (req, res, next) => {
+    req.session.loged ? next() : res.status(401).send("Error de autenticación");
+}
+//Ruta privada para usuario logueados, va con el auth de parametro que configuramos arriba 
+app.get("/privado", auth, (req, res) => {
+    res.send("Pagina para usuarios logueados")
 })
 
 //ruta para setear una cookie
