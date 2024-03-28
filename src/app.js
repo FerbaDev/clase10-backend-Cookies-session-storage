@@ -2,15 +2,36 @@ import express from "express";
 const app = express();
 const PUERTO = 8080;
 import cookieParser from "cookie-parser";
+import session from "express-session";
 
 //middleware para cookie parser
 const PASSWORD = "clavesecreta";
 app.use(cookieParser(PASSWORD));
 
+//Middleware de session
+app.use(session({
+    secret: "secretCoder",
+    resave: true,   //esto permite mantener activa la sesion frente a la inactividad del usuario
+    saveUninitialized: true  //permite guardar cualquier sesion
+}))
 
 //rutas
 app.get("/", (req, res) => {
     res.send("conecta")
+})
+
+//ruta para lenatar session
+app.get("/session", (req, res) => {
+    //si al conectarme la sesion ya existe, aumento el contador de visitas
+
+    if (req.session.counter) {
+        req.session.counter++;
+        res.send(`Visitaste este sitio ${req.session.counter} veces`);
+    } else {
+        req.session.counter = 1;
+        res.send("Bienvenido")
+    }
+
 })
 
 //ruta para setear una cookie
