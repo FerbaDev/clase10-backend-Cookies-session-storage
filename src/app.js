@@ -31,7 +31,15 @@ app.get("/session", (req, res) => {
         req.session.counter = 1;
         res.send("Bienvenido")
     }
+})
 
+//Logout
+app.get("/logout", (req, res) => {
+    //para eliminar datos de session se usa el parametro de req y el metodo destroy
+    //lo podemos pasar con un callback
+    req.session.destroy((error) => {
+        !error ? res.send("Session cerrada") : res.send("Tenemos un error");
+    })
 })
 
 //ruta para setear una cookie
