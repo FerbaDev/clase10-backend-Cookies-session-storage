@@ -5,6 +5,8 @@ import cookieParser from "cookie-parser";
 import session from "express-session";
 import FileStore  from "session-file-store";
 const fileStore = FileStore(session);
+import MongoStore from "connect-mongo";
+import 'dotenv/config'
 
 //middleware para cookie parser
 const PASSWORD = "clavesecreta";
@@ -16,10 +18,15 @@ app.use(session({
     resave: true,   //esto permite mantener activa la sesion frente a la inactividad del usuario
     saveUninitialized: true,  //permite guardar cualquier sesion
     //agregamos configuracion para usar file storage
-    store: new fileStore({path: "./src/sessions", ttl: 10000, retries: 1})
+    //store: new fileStore({path: "./src/sessions", ttl: 10000, retries: 1}) (((ESTÁ COMENTADO PARA QUE FUNCIONE MONGO STORE)))
+    //MONGO STORE
+    store: MongoStore.create({
+        mongoUrl: `mongodb+srv://Ferbadev:${process.env.PASSWORD}@cluster0.qaz6nck.mongodb.net/ecommerce?retryWrites=true&w=majority&appName=Cluster0`, ttl: 120
+    })
     //path: la ruta donde se guardan las sessiones
     //ttl es el tiempo que tarda en irse)time ti live)
     //retries: el numero de veces que reintenta si da
+    
 }))
 
 //rutas
@@ -27,7 +34,7 @@ app.get("/", (req, res) => {
     res.send("conecta")
 })
 
-//ruta para lenatar session
+//ruta para levantar session
 app.get("/session", (req, res) => {
     //si al conectarme la sesion ya existe, aumento el contador de visitas
 

@@ -25,9 +25,10 @@ middleware de autenticacion ---------- 01:38
 ## Storage
 
 file storage ------------------------- 02:36     npm i session-file-store
+Storage con Mongo DB Atlas ----------- 02:49     npm i connect-mongo
 
 
-dejé en 01:20
+dejé en 02:42
 
 
 
