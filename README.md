@@ -27,8 +27,13 @@ middleware de autenticacion ---------- 01:38
 file storage ------------------------- 02:36     npm i session-file-store
 Storage con Mongo DB Atlas ----------- 02:49     npm i connect-mongo
 
+## empezando desafio de login
 
-dejé en 02:42
+instalando express-handlebars -------- 03:07     npm i express-handlebars
+armando las vistas ------------------- 03:10
+
+
+dejé en 03:10
 
 
 
