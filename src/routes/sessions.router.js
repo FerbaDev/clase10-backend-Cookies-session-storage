@@ -23,10 +23,29 @@ router.post("/", async (req, res) => {
     } catch (error) {
         res.status(500).send("Error interno del server en session router")
     }
-
-
-
     res.render("register", {title: "Session"})
+})
+
+//Login
+
+router.post("/login", async (req, res) => {
+    const {email, password} = req.body; //traemos los datos del body
+    try {
+        const usuario = await UserModel.findOne({email});
+        if (usuario) {
+            if (usuario.password === password) {
+                req.session.login = true;
+                req.session.user = {...usuario._doc};
+                res.redirect("/profile");
+            } else {
+                res.status(401).send("Error de autenticación");
+            }
+        } else {
+            res.status(404).send("Usuario no encontrado, session router");
+        }
+    } catch (error) {
+        res.status(500).send("Error del server en login session.router")
+    }
 })
 
 
