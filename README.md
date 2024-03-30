@@ -31,9 +31,14 @@ Storage con Mongo DB Atlas ----------- 02:49     npm i connect-mongo
 
 instalando express-handlebars -------- 03:07     npm i express-handlebars
 armando las vistas ------------------- 03:10
+user model --------------------------- 03:18    
+register formulario ------------------ 03:20
+views router ------------------------- 03:39
+rutas en app.js ---------------------- 03:40
+session router ----------------------- 03:42
 
 
-dejé en 03:10
+dejé en 03:46
 
 
 

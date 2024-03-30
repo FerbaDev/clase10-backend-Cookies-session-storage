@@ -9,6 +9,8 @@ import MongoStore from "connect-mongo";
 import 'dotenv/config'
 import exphbs from "express-handlebars";
 import "./mongoConfig.js"
+import sessionsRouter from "./routes/sessions.router.js";
+import viewsRouter from "./routes/views.router.js";
 
 //middleware para cookie parser
 const PASSWORD = "clavesecreta";
@@ -37,10 +39,8 @@ app.use(session({
 }))
 
 //rutas
-app.get("/", (req, res) => {
-    res.send("conecta")
-})
-
+app.use("/api/session", sessionsRouter);
+app.use("/", viewsRouter);
 //listen
 app.listen(PUERTO, () => {
     console.log(`Conectado a http://localhost:${PUERTO}`);
