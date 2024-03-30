@@ -48,6 +48,13 @@ router.post("/login", async (req, res) => {
     }
 })
 
+//Logout
+router.get("/logout", (req, res) => {
+    if (req.session.login) {
+        req.session.destroy();
+        res.redirect("/login")
+    }
+})
 
 
 
