@@ -7,10 +7,17 @@ import FileStore  from "session-file-store";
 const fileStore = FileStore(session);
 import MongoStore from "connect-mongo";
 import 'dotenv/config'
+import exphbs from "express-handlebars";
+import "./mongoConfig.js"
 
 //middleware para cookie parser
 const PASSWORD = "clavesecreta";
 app.use(cookieParser(PASSWORD));
+
+//Middleware Express Handlebars
+app.engine("handlebars", exphbs.engine());
+app.set("view engine", "handlebars");
+app.set("views", "./src/views");
 
 //Middleware de session
 app.use(session({
