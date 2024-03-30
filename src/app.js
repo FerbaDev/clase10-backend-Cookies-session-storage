@@ -15,6 +15,9 @@ import viewsRouter from "./routes/views.router.js";
 //middleware para cookie parser
 const PASSWORD = "clavesecreta";
 app.use(cookieParser(PASSWORD));
+//Middleware
+app.use(express.json());
+app.use(express.urlencoded({extended: true}));
 
 //Middleware Express Handlebars
 app.engine("handlebars", exphbs.engine());
@@ -39,7 +42,7 @@ app.use(session({
 }))
 
 //rutas
-app.use("/api/session", sessionsRouter);
+app.use("/api/sessions", sessionsRouter);
 app.use("/", viewsRouter);
 //listen
 app.listen(PUERTO, () => {
