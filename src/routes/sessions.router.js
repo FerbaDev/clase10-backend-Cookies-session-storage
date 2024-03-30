@@ -13,8 +13,9 @@ router.post("/", async (req, res) => {
         if (userExist) {
             res.status(400).send("El correo electronico ya existe")
         } 
+        const role = email === "admincoder@coder.com" ? "admin" : "user"
         //Si no esta registrado creamos nuevo usuario
-        const newUser = await UserModel.create({first_name, last_name, email, age, password})
+        const newUser = await UserModel.create({first_name, last_name, email, age, password, role})
         //Ahora armamos la session
         req.session.login = true;
         req.session.user = {...newUser._doc}//metodo para subir el obj newUser
@@ -36,7 +37,7 @@ router.post("/login", async (req, res) => {
             if (usuario.password === password) {
                 req.session.login = true;
                 req.session.user = {...usuario._doc};
-                res.redirect("/profile");
+                res.redirect("/productos");
             } else {
                 res.status(401).send("Error de autenticación");
             }
